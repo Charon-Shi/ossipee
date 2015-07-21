@@ -25,4 +25,4 @@
   # - name: transfer script
   - copy: src=mariadb_setup.sh dest=/home/mariadb_setup.sh  mode=0700
   #- name: execute script  
-  - command: sh /home/mariadb_setup.sh ipa.testscl TESTSCL rdo.testscl {{ ipa_admin_user_password }}
+  - command: sh /home/mariadb_setup.sh ipa.testscl TESTSCL rdo.testscl {{ ipa_admin_user_password }} 192.168.52.4
