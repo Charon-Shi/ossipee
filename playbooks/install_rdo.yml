@@ -4,7 +4,7 @@
   sudo: yes
   name: install-rdo
   tasks:
-  - hostname: name=rdo.ayoung
+  #- hostname: name=rdo.ayoung
   - yum: name=cloud-init state=absent
   - yum: name=* state=latest
   - yum: name=ipa-client,epel-release state=latest
@@ -22,3 +22,7 @@
 
   - command: sed -i "s/^nameserver .*/nameserver 192.168.52.2/g" /etc/resolv.conf  
   - command: ipa-client-install -U -p admin@AYOUNG -w FreeIPA4All --force
+  # - name: transfer script
+  - copy: src=mariadb_setup.sh dest=/home/mariadb_setup.sh  mode=0700
+  #- name: execute script  
+  - command: sh /home/mariadb_setup.sh ipa.testscl TESTSCL rdo.testscl {{ ipa_admin_user_password }}
