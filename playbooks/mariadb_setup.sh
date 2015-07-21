@@ -64,9 +64,6 @@ touch /home/keystone.rc
 echo "export OS_AUTH_URL=http://$LOCAL_IP:5000/v2.0/" >> /home/keystone.rc
 echo 'export OS_USERNAME=admin' >> /home/keystone.rc
 echo "export OS_PASSWORD=$PASSWD" >> /home/keystone.rc
-Gme: execute script
-  #- command: sh /home/mariadb_setup.sh ipa.testscl TESTSCL rdo.testscl {{ ipa_admin_user_password }}
-RANT ALL PRIVILEGES ON keystone.* to '$DB_USER'@'127.0.0.1';
 echo 'export OS_USER_DOMAIN_NAME=Default' >> /home/keystone.rc
 echo 'export OS_PROJECT_DOMAIN_NAME=Default' >> /home/keystone.rc
 echo 'export OS_PROJECT_NAME=IdM' >> /home/keystone.rc
