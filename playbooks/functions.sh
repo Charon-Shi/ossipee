@@ -181,3 +181,24 @@ ipa-getkeytab -p $_CINDER_IPA_USER@$_REALM -k /var/kerberos/krb5/user/$_CINDER_E
 chcon -v --type=httpd_sys_content_t /var/kerberos/krb5/user/$_CINDER_EUID/client.keytab
 sudo chown $_CINDER_IPA_USER:$_CINDER_IPA_USER /var/kerberos/krb5/user/$_CINDER_EUID/client.keytab
 }
+
+get_neutron_keytab() {
+_PASSWD=$1
+_REALM=$2
+_IPA=$3
+_NEUTRON_IPA_USER=$4
+_NEUTRON_EUID=$5
+_NEUTRON_DB_USER=$6
+
+sed -e "s/Neutron Daemons:\/var\/lib\/neutron:\/sbin\/nologin/Neutron Daemons:\/var\/lib\/neutron:\/bin\/bash/" -i /etc/passwd
+
+#change connection URL
+sed -e "s/cinder:$_PASSWD/$_NEUTRON_DB_USER/" -i /etc/neutron/neutron.conf
+
+sudo mkdir /var/kerberos/krb5/user/$_NEUTRON_EUID
+sudo chown $_NEUTRON_IPA_USER:$_NEUTRON_IPA_USER /var/kerberos/krb5/user/$_NEUTRON_EUID
+sudo chmod 700 /var/kerberos/krb5/user/$_NEUTRON_EUID
+ipa-getkeytab -p $_NEUTRON_IPA_USER@$_REALM -k /var/kerberos/krb5/user/$_NEUTRON_EUID/client.keytab -s $_IPA
+chcon -v --type=httpd_sys_content_t /var/kerberos/krb5/user/$_NEUTRON_EUID/client.keytab
+sudo chown $_NEUTRON_IPA_USER:$_NEUTRON_IPA_USER /var/kerberos/krb5/user/$_NEUTRON_EUID/client.keytab
+}
