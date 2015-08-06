@@ -10,21 +10,25 @@ KEYSTONE_DB_USER=test_keystone
 NOVA_DB_USER=test_nova
 GLANCE_DB_USER=test_glance
 CINDER_DB_USER=test_cinder
+NEUTRON_DB_USER=test_neutron
 
 KEYSTONE_IPA_USER=keystone
 NOVA_IPA_USER=nova
 GLANCE_IPA_USER=glance
 CINDER_IPA_USER=cinder
+NEUTRON_IPA_USER=neutron
 
 KEYSTONE_DB_NAME=keystone
 NOVA_DB_NAME=nova
 GLANCE_DB_NAME=glance
 CINDER_DB_NAME=cinder
+NEUTRON_DB_NAME=neutron
 
 KEYSTONE_EUID=163
 NOVA_EUID=162
 GLANCE_EUID=161
 CINDER_EUID=165
+NEUTRON_EUID=991
 
 LOCAL_IP=`hostname -I`
 LOCAL_IP="${LOCAL_IP%"${LOCAL_IP##*[![:space:]]}"}"
@@ -46,6 +50,3 @@ get_glance_keytab $PASSWD $REALM $IPA $GLANCE_IPA_USER $GLANCE_EUID $GLANCE_DB_U
 
 create_db_user $CINDER_DB_USER $CINDER_IPA_USER $REALM $CINDER_DB_NAME
 get_cinder_keytab $PASSWD $REALM $IPA $CINDER_IPA_USER $CINDER_EUID $CINDER_DB_USER
-
-#TODO use the keystonerc_admin instead for now
-#create_keystonerc $PASSWD $LOCAL_IP
