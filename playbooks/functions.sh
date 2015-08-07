@@ -193,7 +193,7 @@ _NEUTRON_DB_USER=$6
 sed -e "s/Neutron Daemons:\/var\/lib\/neutron:\/sbin\/nologin/Neutron Daemons:\/var\/lib\/neutron:\/bin\/bash/" -i /etc/passwd
 
 #change connection URL
-sed -e "s/cinder:$_PASSWD/$_NEUTRON_DB_USER/" -i /etc/neutron/neutron.conf
+sed -e "s/neutron:$_PASSWD/$_NEUTRON_DB_USER/" -i /etc/neutron/neutron.conf
 
 sudo mkdir /var/kerberos/krb5/user/$_NEUTRON_EUID
 sudo chown $_NEUTRON_IPA_USER:$_NEUTRON_IPA_USER /var/kerberos/krb5/user/$_NEUTRON_EUID
