@@ -128,8 +128,7 @@ sed -e "s/Nova Daemons:\/var\/lib\/nova:\/sbin\/nologin/Nova Daemons:\/var\/lib\
 
 #change connection URL
 sed -e "s/nova:$_PASSWD/$_NOVA_DB_USER/" -i /etc/nova/nova.conf
-#sed -e "s/nova:nova/$_NOVA_DB_USER/" -i /etc/nova/nova.conf
-sed -e "/#connection=/a connection=mysql:\/\/$_NOVA_DB_USER@localhost\/nova" -i /etc/nova/nova.conf
+#sed -e "/#connection=/a connection=mysql:\/\/$_NOVA_DB_USER@localhost\/nova" -i /etc/nova/nova.conf
 
 sudo mkdir /var/kerberos/krb5/user/$_NOVA_EUID
 sudo chown $_NOVA_IPA_USER:$_NOVA_IPA_USER /var/kerberos/krb5/user/$_NOVA_EUID
